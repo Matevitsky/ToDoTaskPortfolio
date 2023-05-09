@@ -1,0 +1,25 @@
+<template>
+    <div class="slds-grid slds-wrap slds-p-around_medium">
+        <div class="slds-col slds-size_1-of-2">
+            <c-create-task ></c-create-task>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <!-- <c-task-form ontaskcreated={handleTaskCreated}></c-task-form>-->
+
+            <!--
+                        <c-task-list tasks={incompleteTasks} ontaskupdate={handleTaskUpdate} ontaskdelete={handleTaskDelete}></c-task-list>
+            -->
+
+        </div>
+    </div>
+    <div class="slds-grid slds-wrap slds-p-around_medium">
+        <div class="slds-col slds-size_1-of-2">
+            <c-task-list></c-task-list>
+            <!--  <c-test-component ></c-test-component>-->
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <!--  <c-task-filter onfilterchange={handleFilterChange}></c-task-filter>-->
+        </div>
+    </div>
+
+</template>

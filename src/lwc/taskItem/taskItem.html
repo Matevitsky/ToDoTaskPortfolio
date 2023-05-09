@@ -1,0 +1,38 @@
+<!--
+ - Created by sergeymatevitsky on 08.05.2023.
+ -->
+
+<!-- Task Item -->
+<template>
+        <lightning-layout-item size="12">
+            <div class="slds-box slds-box_xx-small slds-theme_shade">
+                <lightning-layout>
+                    <lightning-layout-item size="3">
+                        <div class="slds-m-left_small">{task.Name}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3">
+                        <div class="slds-m-left_small">{task.Status__c}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3">
+                        <div class="slds-m-left_small">{task.Due_Date__c}</div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="3">
+                        <lightning-button-group>
+                            <lightning-button-icon
+                                    icon-name="utility:edit"
+                                    variant="border-filled"
+                                    onclick={editTask}
+                                    alternative-text="Edit"
+                            ></lightning-button-icon>
+                            <lightning-button-icon
+                                    icon-name="utility:delete"
+                                    variant="border-filled"
+                                    onclick={deleteTask}
+                                    alternative-text="Delete"
+                            ></lightning-button-icon>
+                        </lightning-button-group>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+        </lightning-layout-item>
+</template>

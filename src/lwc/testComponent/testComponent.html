@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-grid slds-gutters slds-wrap task" key={task.Id}>
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_8-of-12">
+            <div class="task-header">
+                <div class="task-title">
+                    <h2>{task.Name}</h2>
+                </div>
+            </div>
+            <div class="task-description">
+                <template if:false={isEditing}>
+                    <p>{task.Description__c}</p>
+                </template>
+                <template if:true={isEditing}>
+                    <lightning-input type="text" label="Name" value={task.Name} onchange={handleNameChange}></lightning-input>
+                    <lightning-textarea label="Description" value={task.Description__c} onchange={handleDescriptionChange}></lightning-textarea>
+                    <lightning-input type="date" label="Due Date" value={task.Due_Date__c} onchange={handleDueDateChange}></lightning-input>
+                    <lightning-button label="Save" variant="brand" onclick={handleSave}></lightning-button>
+                    <lightning-button label="Cancel" variant="neutral" onclick={handleCancel}></lightning-button>
+                </template>
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12 slds-medium-size_4-of-12 slds-text-align_right">
+            <p class="task-due">{task.Due_Date__c}</p>
+            <div class="task-icon">
+                <lightning-icon size="x-small" icon-name="utility:edit" alternative-text="Edit" onclick={handleEdit}></lightning-icon>
+                <lightning-icon size="x-small" icon-name="utility:delete" alternative-text="Delete" onclick={handleDelete}></lightning-icon>
+            </div>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,74 @@
+.task {
+    background-color: #eee;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-header h2 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.task-header .task-icon {
+    display: flex;
+    align-items: center;
+}
+
+.task-header .task-icon lightning-icon {
+    margin-right: 10px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.task-header .task-icon lightning-icon:hover {
+    color: #333;
+}
+
+.task-due {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.task-description {
+    margin-top: 0;
+    font-size: 18px;
+    line-height: 1.4;
+    color: #333;
+}
+
+.task-edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0px;
+}
+
+.task-edit-buttons lightning-button {
+    margin-left: 10px;
+}
+
+.task h2[contenteditable="true"],
+.task p[contenteditable="true"] {
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.task h2[contenteditable="true"]:focus,
+.task p[contenteditable="true"]:focus {
+    outline: none;
+    border-color: #555;
+}

@@ -1,0 +1,25 @@
+<!--
+ - Created by sergeymatevitsky on 08.05.2023.
+ -->
+
+<!-- Task List -->
+<template>
+  <div class="task-list">
+
+        <div class="slds-m-around_medium">
+            <template if:true={tasks}>
+                <template for:each={tasks} for:item="task">
+                    <!-- ontaskdelete={handleTaskDelete} ontaskupdate={handleTaskUpdate}-->
+                    <c-test-component task={task} key={task.Id}></c-test-component>
+                </template>
+            </template>
+        </div>
+
+
+        <!-- <template if:true={showEditModal}>
+           &lt;!&ndash;  <c-task-form task-id={selectedTaskId} ontaskcreated={handleTaskCreated} ontaskupdated={handleTaskUpdated}
+                          onclose={handleModalClose}></c-task-form>&ndash;&gt;
+         </template>-->
+  </div>
+</template>
+

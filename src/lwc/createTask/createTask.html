@@ -1,0 +1,45 @@
+<!--
+ - Created by sergeymatevitsky on 05.05.2023.
+ -->
+
+<!-- Create Task -->
+<template>
+    <lightning-card class="task">
+        <div class="task-header">
+            <h2>Create Task</h2>
+        </div>
+        <div class="slds-p-around_medium">
+            <div class="slds-form slds-form_stacked">
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label">Task Name</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" class="slds-input" onchange={handleNameChange} />
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label">Due Date</label>
+                    <div class="slds-form-element__control">
+                        <input type="date" class="slds-input" value={dueDate} onchange={handleDueDateChange} />
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label">Status</label>
+                    <div class="slds-form-element__control">
+                        <lightning-combobox value={status} options={statusOptions} onchange={handleStatusChange}></lightning-combobox>
+                    </div>
+                </div>
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label">Description</label>
+                    <div class="slds-form-element__control">
+                        <textarea class="slds-textarea" value={description} onchange={handleDescriptionChange}></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-m-top_medium task-edit-buttons">
+                <lightning-button variant="brand" label="Create Task" onclick={handleFormSubmit}></lightning-button>
+            </div>
+        </div>
+    </lightning-card>
+</template>
+
+
