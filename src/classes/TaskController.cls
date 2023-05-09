@@ -1,40 +1,84 @@
 /**
- * Created by sergeymatevitsky on 05.05.2023.
+ * Created by sergeymatevitsky on 18.05.2023.
  */
-
 public with sharing class TaskController {
-
-    @AuraEnabled(Cacheable=true)
-    public static List<ToDo_Task__c> getIncompleteTasks() {
-        String currentUserId = System.UserInfo.getUserId();
-        return [SELECT Id, Name, Description__c, Due_Date__c, Status__c, Assigned_To__c FROM ToDo_Task__c WHERE Assigned_To__c = :currentUserId AND Status__c != 'Completed'];
+    public class TaskControllerException extends Exception {
     }
 
+    private static final TaskService taskService = new TaskService();
+
+    /**
+     * @description Retrieves tasks based on the provided status.
+     * @param {String} status - The status of the tasks to retrieve.
+     * @return {List<ToDo_Task__c>} - The list of tasks.
+     */
     @AuraEnabled(Cacheable=true)
-    public static List<ToDo_Task__c> getCompletedTasks(Id userId) {
-        return [SELECT Id, Name, Description__c, Due_Date__c, Status__c, Assigned_To__c FROM ToDo_Task__c WHERE Assigned_To__c = :userId AND Status__c = 'Completed'];
+    public static List<ToDo_Task__c> getTasksByStatus(String status) {
+
+        switch on status {
+            when 'Not Started' {
+                return taskService.getNotStartedTasks();
+            }
+            when 'Completed' {
+                return taskService.getCompletedTasks();
+            }
+        }
+        return new List<ToDo_Task__c>();
     }
 
+    /**
+     * @description Creates a new task with the provided details.
+     * @param {String} name - The name of the task.
+     * @param {String} description - The description of the task.
+     * @param {Date} dueDate - The due date of the task.
+     * @return {ToDo_Task__c} - The created task.
+     * @throws TaskControllerException if the name is empty.
+     */
     @AuraEnabled
-    public static ToDo_Task__c createTask(String name, String description, Date dueDate, String status) {
+    public static ToDo_Task__c createTask(String name, String description, Date dueDate) {
+        if (nameNotValid(name)) {
+            throw new TaskControllerException('Name cannot be empty');
+        }
+
         String currentUserId = System.UserInfo.getUserId();
-        ToDo_Task__c task = new ToDo_Task__c(Name = name, Description__c = description, Due_Date__c = dueDate, Assigned_To__c =currentUserId, Status__c = status);
-        System.debug('TASK To Create ' + task);
-        insert task;
-        return task;
+        ToDo_Task__c task = new ToDo_Task__c(
+                Name = name,
+                Description__c = description,
+                Due_Date__c = dueDate,
+                Assigned_To__c = currentUserId,
+                Status__c = 'Not Started'
+        );
+
+        return taskService.insertTask(task);
+
     }
 
+    private static Boolean nameNotValid(String name) {
+
+        return String.isBlank(name);
+    }
+
+    /**
+     * @description Updates an existing task.
+     * @param {ToDo_Task__c} task - The task to update.
+     * @return {ToDo_Task__c} - The updated task.
+     */
     @AuraEnabled
     public static ToDo_Task__c updateTask(ToDo_Task__c task) {
-        //Add validation or additional logic here
-        System.debug('Task to update  '+task);
-        update task;
-        return task;
+        if (nameNotValid(task.Name)) {
+            throw new TaskControllerException('Name cannot be empty');
+        }
+        return taskService.updateTask(task);
     }
 
+    /**
+     * @description Deletes a task based on the provided task ID.
+     * @param {Id} taskId - The ID of the task to delete.
+     * @return {ToDo_Task__c} - The deleted task.
+     */
     @AuraEnabled
-    public static void deleteTask(Id taskId) {
+    public static ToDo_Task__c deleteTask(Id taskId) {
         ToDo_Task__c task = new ToDo_Task__c(Id = taskId);
-        delete task;
+        return taskService.deleteTask(task);
     }
 }

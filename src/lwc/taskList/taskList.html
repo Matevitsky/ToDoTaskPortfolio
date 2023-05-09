@@ -1,25 +1,29 @@
-<!--
- - Created by sergeymatevitsky on 08.05.2023.
- -->
-
-<!-- Task List -->
 <template>
-  <div class="task-list">
-
-        <div class="slds-m-around_medium">
-            <template if:true={tasks}>
-                <template for:each={tasks} for:item="task">
-                    <!-- ontaskdelete={handleTaskDelete} ontaskupdate={handleTaskUpdate}-->
-                    <c-test-component task={task} key={task.Id}></c-test-component>
-                </template>
-            </template>
+    <div class="task">
+        <div class="task-header">
+            <h2 class="task-title">{blockName}</h2>
         </div>
 
+        <template if:true={tasks}>
+            <template for:each={tasks} for:item="task" key={task.Id}>
+                <c-task-item task={task}
+                             key={task.Id}
+                             ondeletetask={handleTaskDelete}
+                             oncompletetask={handleCompleteTask}
+                             onupdatetask={refresh}>
+                </c-task-item>
+            </template>
+        </template>
 
-        <!-- <template if:true={showEditModal}>
-           &lt;!&ndash;  <c-task-form task-id={selectedTaskId} ontaskcreated={handleTaskCreated} ontaskupdated={handleTaskUpdated}
-                          onclose={handleModalClose}></c-task-form>&ndash;&gt;
-         </template>-->
-  </div>
+        <template if:true={taskToDo}>
+            <div class="add-task" onclick={toggleCreateTask}>
+                <div class="add-task-icon">+</div>
+                <div class="add-task-text">Add Task</div>
+            </div>
+        </template>
+
+        <template if:true={isCreatNewTask}>
+            <c-create-task ontaskcreated={handleTaskCreated}></c-create-task>
+        </template>
+    </div>
 </template>
-

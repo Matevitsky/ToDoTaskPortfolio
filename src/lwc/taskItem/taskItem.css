@@ -4,9 +4,7 @@
     margin-bottom: 20px;
     border-radius: 15px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
-    position: relative;
 }
-
 .task-header {
     display: flex;
     justify-content: space-between;
@@ -16,14 +14,9 @@
 
 .task-header h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     color: #333;
-}
-
-.task-header .task-icon {
-    display: flex;
-    align-items: center;
 }
 
 .task-header .task-icon lightning-icon {
@@ -37,16 +30,8 @@
     color: #333;
 }
 
-.task-due {
-    margin: 0;
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
 .task-description {
-    margin-top: 0;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.4;
     color: #333;
 }
@@ -54,11 +39,21 @@
 .task-edit-buttons {
     display: flex;
     justify-content: flex-end;
-    margin-top: 0px;
+    margin-top: 10px;
 }
 
 .task-edit-buttons lightning-button {
     margin-left: 10px;
+}
+
+.task p {
+    margin: 0;
+}
+
+.task-footer {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
 }
 
 .task h2[contenteditable="true"],
